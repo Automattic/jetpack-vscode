@@ -1,4 +1,6 @@
 import * as vscode from 'vscode';
+
+import {rsyncCommand} from './commands/rsync';
 import {findJetpackRoot} from './util';
 
 export function activate(context: vscode.ExtensionContext) {
@@ -22,7 +24,10 @@ export function activate(context: vscode.ExtensionContext) {
 		vscode.window.showInformationMessage('Hello World from Jetpack!');
 	});
 
+	let rsync = vscode.commands.registerCommand('jetpack.rsync', rsyncCommand);
+
 	context.subscriptions.push(disposable);
+	context.subscriptions.push(rsync);
 }
 
 // This method is called when your extension is deactivated
