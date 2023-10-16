@@ -16,6 +16,10 @@
       {
         "command": "jetpack.helloWorld",
         "title": "Hello World"
+      },
+      {
+        "command": "jetpack.rsync",
+        "title": "Jetpack: Rsync"
       }
     ]
   },
