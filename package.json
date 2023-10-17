@@ -20,6 +20,14 @@
       {
         "command": "jetpack.rsync",
         "title": "Jetpack: Rsync"
+      },
+      {
+        "command": "jetpack.watchProject",
+        "title": "Jetpack: Watch Project"
+      },
+      {
+        "command": "jetpack.watchProject.stop",
+        "title": "Jetpack: Stop Watching Project"
       }
     ]
   },
