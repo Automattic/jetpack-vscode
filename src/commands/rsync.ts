@@ -17,10 +17,10 @@ const getSavedSites = ( configPath: string ) => {
 		const fileContents = fs.readFileSync(configPath, 'utf8');
 		const config = JSON.parse(fileContents);
 		const keys = Object.keys(config);
-		keys.unshift('Add New Site');
+		keys.unshift('+ Add New Site');
 		return keys;
 	} catch {
-		return ['Add New Site'];
+		return ['+ Add New Site'];
 	}
 }
 
@@ -52,7 +52,7 @@ export const rsyncCommand = async () => {
 	}
 
 	let wpPath: string | undefined;
-	if (existingSite === 'Add New Site') {
+	if (existingSite === '+ Add New Site') {
 		wpPath = await vscode.window.showInputBox({
 			prompt: 'Enter the remote path to upload the plugin contents to.',
 			placeHolder: 'user@server:public_html/wp-content/plugins/jetpack',
