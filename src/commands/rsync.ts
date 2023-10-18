@@ -5,9 +5,31 @@ import * as vscode from 'vscode';
 import {findJetpackRoot} from '../util';
 
 const getPlugins = (rootPath: string) =>
-    fs.readdirSync(path.join(rootPath, 'projects', 'plugins'), {withFileTypes: true})
-        .filter(result => result.isDirectory())
-        .map(result => result.name);
+	fs.readdirSync(path.join(rootPath, 'projects', 'plugins'), {withFileTypes: true})
+		.filter(result => result.isDirectory())
+		.map(result => result.name);
+
+const configFilePath = path.join(process.env.HOME || '', '.config', 'configstore', 'automattic', 'jetpack-cli', 'rsync.json');
+
+// Return a list of saved sites from the client's configstore file at 'automattic/jetpack-cli/rsync' if available.
+const getSavedSites = ( configPath: string ) => {
+	try {
+		const fileContents = fs.readFileSync(configPath, 'utf8');
+		const config = JSON.parse(fileContents);
+		const keys = Object.keys(config);
+		keys.push('Add New Site');
+		return keys;
+	} catch {
+		return ['Add New Site'];
+	}
+}
+
+// Return the path to the saved site's plugin
+const getSavedPath = (site: string, configPath: string = configFilePath) => {
+	const fileContents = fs.readFileSync(configPath, 'utf8');
+	const config = JSON.parse(fileContents);
+	return config[site];
+}
 
 export const rsyncCommand = async () => {
     const jetpackRoot = findJetpackRoot();
@@ -20,10 +42,29 @@ export const rsyncCommand = async () => {
         placeHolder: "Which plugin would you like to sync?",
     });
 
-    const wpPath = await vscode.window.showInputBox({
-        prompt: 'Enter the remote path to upload the plugin contents to.',
-        placeHolder: 'user@server:public_html/wp-content/plugins/jetpack',
-    });
+	const existingSite = await vscode.window.showQuickPick(getSavedSites(configFilePath), {
+		placeHolder: "Which site would you like to sync to?"
+	});
+
+	if (typeof existingSite === 'undefined') {
+		console.log('No site selected, exiting.');
+		return;
+	}
+
+	let wpPath: string | undefined;
+	if (existingSite === 'Add New Site') {
+		wpPath = await vscode.window.showInputBox({
+			prompt: 'Enter the remote path to upload the plugin contents to.',
+			placeHolder: 'user@server:public_html/wp-content/plugins/jetpack',
+		});
+	} else {
+		wpPath = getSavedPath(existingSite);
+	}
+
+	if (typeof wpPath === 'undefined') {
+		console.log('No path valid selected, exiting.');
+		return;
+	}
 
     const confirmation = await vscode.window.showWarningMessage(
         `You're about to upload the contents of plugins/${plugin} to ${wpPath}. Do you want to proceed?`,
