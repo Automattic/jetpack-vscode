@@ -17,7 +17,7 @@ const getSavedSites = ( configPath: string ) => {
 		const fileContents = fs.readFileSync(configPath, 'utf8');
 		const config = JSON.parse(fileContents);
 		const keys = Object.keys(config);
-		keys.push('Add New Site');
+		keys.unshift('Add New Site');
 		return keys;
 	} catch {
 		return ['Add New Site'];
