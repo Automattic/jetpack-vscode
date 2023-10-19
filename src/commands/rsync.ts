@@ -44,24 +44,19 @@ export const rsyncCommand = async () => {
         return;
     }
 
-	// If wpPath includes "jurassic.ninja" we need to open a terminal so the password can be entered.
-	// Otherwise, we can just run the command in the background.
+	const terminal = vscode.window.createTerminal({
+		name: 'Jetpack Rsync',
+		cwd: jetpackRoot,
+	});
+
+	// Show the terminal if connecting to a Jurassic.ninja site so that the user can enter their password.
 	if (wpPath.includes('jurassic.ninja')) {
-		const terminal = vscode.window.createTerminal({
-			name: 'Jetpack Rsync',
-			cwd: jetpackRoot,
-		});
 		terminal.show();
-		try {
-			terminal.sendText(`pnpm jetpack rsync ${plugin} ${wpPath}`);
-		} catch (error) {
-			console.log(error);
-		}
-	} else {
-		try {
-			execSync(`pnpm jetpack rsync ${plugin} ${wpPath}`, {cwd: jetpackRoot});
-		} catch (error) {
-			console.log(error);
-		}
+	}
+
+	try {
+		terminal.sendText(`pnpm jetpack rsync ${plugin} ${wpPath}`);
+	} catch (error) {
+		console.log(error);
 	}
 }
