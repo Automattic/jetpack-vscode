@@ -4,7 +4,7 @@ import * as path from 'path';
 import * as vscode from 'vscode';
 import {findJetpackRoot} from '../util';
 
-const addNewSite = '+ Add New Site';
+const newSiteOption = '+ Add New Site';
 const getPlugins = (rootPath: string) =>
 	fs.readdirSync(path.join(rootPath, 'projects', 'plugins'), {withFileTypes: true})
 		.filter(result => result.isDirectory())
@@ -18,10 +18,10 @@ const getSavedSites = ( configPath: string ) => {
 		const fileContents = fs.readFileSync(configPath, 'utf8');
 		const config = JSON.parse(fileContents);
 		const keys = Object.keys(config);
-		keys.unshift(addNewSite);
+		keys.unshift(newSiteOption);
 		return keys;
 	} catch {
-		return [addNewSite];
+		return [newSiteOption];
 	}
 }
 
@@ -53,7 +53,7 @@ export const rsyncCommand = async () => {
 	}
 
 	let wpPath: string | undefined;
-	if (existingSite === addNewSite) {
+	if (existingSite === newSiteOption) {
 		wpPath = await vscode.window.showInputBox({
 			prompt: 'Enter the remote path to upload the plugin contents to.',
 			placeHolder: 'user@server:public_html/wp-content/plugins/jetpack',
