@@ -46,7 +46,7 @@ export const rsyncCommand = async () => {
 		placeHolder: "Which site would you like to sync to?"
 	});
 
-	if (typeof existingSite === 'undefined') {
+	if (!existingSite) {
 		console.log('No site selected, exiting.');
 		return;
 	}
