@@ -20,13 +20,17 @@ export const rsyncCommand = async () => {
         placeHolder: "Which plugin would you like to sync?",
     });
 
+	if (!plugin) {
+		return;
+	}
+
     const wpPath = await vscode.window.showInputBox({
         prompt: 'Enter the remote path to upload the plugin contents to.',
         placeHolder: 'user@server:public_html/wp-content/plugins/jetpack',
 		ignoreFocusOut: true,
     });
 
-	if (!plugin || !wpPath) {
+	if (!wpPath) {
 		return;
 	}
 
