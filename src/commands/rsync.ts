@@ -61,7 +61,7 @@ export const rsyncCommand = async () => {
 		wpPath = getSavedPath(existingSite);
 	}
 
-	if (typeof wpPath === 'undefined') {
+	if (!wpPath) {
 		console.log('No path valid selected, exiting.');
 		return;
 	}
