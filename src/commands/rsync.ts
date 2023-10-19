@@ -20,10 +20,19 @@ export const rsyncCommand = async () => {
         placeHolder: "Which plugin would you like to sync?",
     });
 
+	if (!plugin) {
+		return;
+	}
+
     const wpPath = await vscode.window.showInputBox({
         prompt: 'Enter the remote path to upload the plugin contents to.',
         placeHolder: 'user@server:public_html/wp-content/plugins/jetpack',
+		ignoreFocusOut: true,
     });
+
+	if (!wpPath) {
+		return;
+	}
 
     const confirmation = await vscode.window.showWarningMessage(
         `You're about to upload the contents of plugins/${plugin} to ${wpPath}. Do you want to proceed?`,
@@ -35,9 +44,20 @@ export const rsyncCommand = async () => {
         return;
     }
 
-    try {
-        execSync(`pnpm jetpack rsync ${plugin} ${wpPath}`, {cwd: jetpackRoot});
-    } catch (error) {
-        console.log(error);
-    }
-};
+	const terminal = vscode.window.createTerminal({
+		name: 'Jetpack Rsync',
+		cwd: jetpackRoot,
+	});
+
+	// Show the terminal if connecting to a Jurassic.ninja site so that the user can enter their password.
+	if (wpPath.includes('jurassic.ninja')) {
+		terminal.show();
+	}
+
+	try {
+		terminal.sendText(`pnpm jetpack rsync ${plugin} ${wpPath}`);
+	} catch (error) {
+		terminal.show();
+		console.log(error);
+	}
+}
