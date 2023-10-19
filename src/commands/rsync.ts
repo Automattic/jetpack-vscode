@@ -57,6 +57,7 @@ export const rsyncCommand = async () => {
 	try {
 		terminal.sendText(`pnpm jetpack rsync ${plugin} ${wpPath}`);
 	} catch (error) {
+		terminal.show();
 		console.log(error);
 	}
 }
