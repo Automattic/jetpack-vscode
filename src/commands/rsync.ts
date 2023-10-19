@@ -52,15 +52,12 @@ export const rsyncCommand = async () => {
 		return;
 	}
 
-	let wpPath: string | undefined;
-	if (existingSite === newSiteOption) {
-		wpPath = await vscode.window.showInputBox({
-			prompt: 'Enter the remote path to upload the plugin contents to.',
-			placeHolder: 'user@server:public_html/wp-content/plugins/jetpack',
-		});
-	} else {
-		wpPath = getSavedPath(existingSite);
-	}
+	const wpPath = existingSite === newSiteOption
+    ? await vscode.window.showInputBox({
+		prompt: 'Enter the remote path to upload the plugin contents to.',
+		placeHolder: 'user@server:public_html/wp-content/plugins/jetpack',
+	})
+    : getSavedPath(existingSite);
 
 	if (!wpPath) {
 		console.log('No path valid selected, exiting.');
