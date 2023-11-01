@@ -3,10 +3,10 @@
  * 
  * curl 'https://public-api.wordpress.com/rest/v1.1/tracks/record?http_envelope=1' -H 'Accept-Encoding: gzip, deflate' -H 'User-Agent: cURL, baby!' -H 'Content-Type: application/json' -H 'Accept: application/json' --data '{"commonProps": {"_ul": "myname"}, "events": [{"_en": "wpcom_test_test"}]}' --compressed
  */
-
-import fetch from 'node-fetch';
+import { exec } from 'child_process';
 
 export function callTrackEvent() {
+	console.log("I am here in the function");
 	const url = 'https://public-api.wordpress.com/rest/v1.1/tracks/record?http_envelope=1';
 	const headers = {
 		'Accept-Encoding': 'gzip, deflate',
@@ -15,16 +15,22 @@ export function callTrackEvent() {
 		'Accept': 'application/json'
 	};
 	const body = {
-		commonProps: { _ul: 'myname' },
+		commonProps: { _ul: 'jetpacktest' },
 		events: [{ _en: 'wpcom_test_test' }]
 	};
 
-	fetch(url, {
-		method: 'POST',
-		headers: headers,
-		body: JSON.stringify(body)
-	})
-	.then(response => response.json())
-	.then(data => console.log(data))
-	.catch(error => console.error('Error:', error));
+	const command = `curl '${url}' -H 'Accept-Encoding: gzip, deflate' -H 'User-Agent: cURL, baby!' -H 'Content-Type: application/json' -H 'Accept: application/json' --data '${body}' --compressed`;
+	//const command = `curl 'https://public-api.wordpress.com/rest/v1.1/tracks/record?http_envelope=1' -H 'Accept-Encoding: gzip, deflate' -H 'User-Agent: Jetpack Test!' -H 'Content-Type: application/json' -H 'Accept: application/json' --data '{"commonProps": {"_ul": "myname"}, "events": [{"_en": "wpcom_test_test"}]}' --compressed`;
+	exec(command, (error, stdout, stderr) => {
+	  if (error) {
+		console.error(`Error: ${error.message}`);
+		return;
+	  }
+	
+	  if (stderr) {
+		console.error(`Stderr: ${stderr}`);
+		return;
+	  }
+	  console.log(`Stdout: ${stdout}`);
+	});
 }
