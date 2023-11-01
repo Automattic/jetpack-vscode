@@ -3,6 +3,7 @@ import * as fs from 'fs';
 import * as path from 'path';
 import * as vscode from 'vscode';
 import {findJetpackRoot} from '../util';
+import {callTrackEvent} from '../tracks';
 
 const newSiteOption = '+ Add New Site';
 const getPlugins = (rootPath: string) =>
@@ -91,6 +92,7 @@ export const rsyncCommand = async () => {
 
 	try {
 		terminal.sendText(`pnpm jetpack rsync ${plugin} ${wpPath}`);
+		callTrackEvent();
 	} catch (error) {
 		terminal.show();
 		console.log(error);
