@@ -32,9 +32,9 @@ export function callTrackEvent( eventName: string ) {
 		.map(([key, value]) => `-H '${key}: ${value}'`)
 		.join(' ');
 
-    const bodyString = `'${JSON.stringify(body)}'`;
+	const bodyString = JSON.stringify(body);
 
-	const command = `curl '${url}' ${headersString} --data ${bodyString} --compressed`;
+	const command = `curl '${url}' ${headersString} --data '${bodyString}' --compressed`;
 
 	exec(command, (error, stdout, stderr) => {
 	  if (error) {
