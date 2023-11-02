@@ -12,6 +12,18 @@
   "activationEvents": [],
   "main": "./out/extension.js",
   "contributes": {
+	"configuration":[
+		{
+			"title": "Analytics Settings",
+			"properties": {
+				"jetpackVSCode.enableAnalytics": {
+					"type": "boolean",
+					"default": false,
+					"description": "Allow the Jetpack VSCode extension to send analytic information on command usage."
+				  }
+			}
+		}
+	],
     "commands": [
       {
         "command": "jetpack.rsync",
