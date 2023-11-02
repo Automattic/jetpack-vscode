@@ -7,7 +7,7 @@ import * as vscode from 'vscode';
 import { exec } from 'child_process';
 
 
-export function callTrackEvent( $eventName: string ) {
+export function callTrackEvent( eventName: string ) {
 
 	// If analytic tracking is disabled, bail.
 	const config = vscode.workspace.getConfiguration('jetpackVSCode');
@@ -25,7 +25,7 @@ export function callTrackEvent( $eventName: string ) {
 	};
 	const body = {
 		commonProps: { _ul: 'jetpackisbestpack' },
-		events: [{ _en: $eventName }]
+		events: [{ _en: eventName }]
 	};
 
 	const headersString = Object.entries(headers)
