@@ -18,7 +18,7 @@
 			"properties": {
 				"jetpackVSCode.enableAnalytics": {
 					"type": "boolean",
-					"default": true,
+					"default": false,
 					"description": "Allow the Jetpack VSCode extension to send analytic information on command usage."
 				  }
 			}
