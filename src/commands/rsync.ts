@@ -92,8 +92,7 @@ export const rsyncCommand = async () => {
 
 	try {
 		terminal.sendText(`pnpm jetpack rsync ${plugin} ${wpPath}`);
-		await callTrackEvent();
-		console.log("After the call");
+		callTrackEvent('wpcom_test_test');
 	} catch (error) {
 		terminal.show();
 		console.log(error);

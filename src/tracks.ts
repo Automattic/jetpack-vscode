@@ -5,8 +5,7 @@
  */
 import { exec } from 'child_process';
 
-export function callTrackEvent() {
-	console.log("I am here in the function");
+export function callTrackEvent( $eventName: string ) {
 	const url = 'https://public-api.wordpress.com/rest/v1.1/tracks/record?http_envelope=1';
 	const headers = {
 		'Accept-Encoding': 'gzip, deflate',
@@ -15,12 +14,18 @@ export function callTrackEvent() {
 		'Accept': 'application/json'
 	};
 	const body = {
-		commonProps: { _ul: 'jetpacktest' },
-		events: [{ _en: 'wpcom_test_test' }]
+		commonProps: { _ul: 'jetpackisbestpack' },
+		events: [{ _en: $eventName }]
 	};
 
-	const command = `curl '${url}' -H 'Accept-Encoding: gzip, deflate' -H 'User-Agent: cURL, baby!' -H 'Content-Type: application/json' -H 'Accept: application/json' --data '${body}' --compressed`;
-	//const command = `curl 'https://public-api.wordpress.com/rest/v1.1/tracks/record?http_envelope=1' -H 'Accept-Encoding: gzip, deflate' -H 'User-Agent: Jetpack Test!' -H 'Content-Type: application/json' -H 'Accept: application/json' --data '{"commonProps": {"_ul": "myname"}, "events": [{"_en": "wpcom_test_test"}]}' --compressed`;
+	const headersString = Object.entries(headers)
+		.map(([key, value]) => `-H '${key}: ${value}'`)
+		.join(' ');
+
+    const bodyString = `'${JSON.stringify(body)}'`;
+
+	const command = `curl '${url}' ${headersString} --data ${bodyString} --compressed`;
+
 	exec(command, (error, stdout, stderr) => {
 	  if (error) {
 		console.error(`Error: ${error.message}`);
