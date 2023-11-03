@@ -4,6 +4,7 @@ import * as path from 'path';
 import * as vscode from 'vscode';
 import {findJetpackRoot} from '../util';
 import { addTask, getTasksByType, removeTask, TaskType } from '../tasks';
+import {callTrackEvent} from '../tracks';
 import { updateStatusBar } from '../widgets/status-bar';
 
 const PROJECT_TYPES = [ 'github-actions', 'js-packages', 'packages', 'plugins' ];
@@ -48,6 +49,8 @@ export const watchProjectCommand = async () => {
 
     addTask(task);
     updateStatusBar();
+
+    callTrackEvent('jetpackvsc_command_exec');
 };
 
 export const stopWatchingProjectCommand = async () => {
