@@ -70,15 +70,17 @@ export const rsyncCommand = async () => {
 		return;
 	}
 
-    const confirmation = await vscode.window.showWarningMessage(
-        `You're about to upload the contents of plugins/${plugin} to ${wpPath}. Do you want to proceed?`,
-        'Yes',
-        'No'
-    );
+	if (existingSite !== newSiteOption) {
+		const confirmation = await vscode.window.showWarningMessage(
+			`You're about to upload the contents of plugins/${plugin} to ${wpPath}. Do you want to proceed?`,
+			'Yes',
+			'No'
+		);
 
-    if (confirmation !== 'Yes') {
-        return;
-    }
+		if (confirmation !== 'Yes') {
+			return;
+		}
+	}
 
 	const terminal = vscode.window.createTerminal({
 		name: 'Jetpack Rsync',
