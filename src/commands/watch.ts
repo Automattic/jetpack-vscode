@@ -58,11 +58,20 @@ export const stopWatchingProjectCommand = async () => {
     }
 
     const taskName = await vscode.window.showQuickPick(
-        activeWatchers.map(({name}) => ({label: name})),
+        [
+            {label: 'Stop all tasks'},
+            ...activeWatchers.map(({name}) => ({label: name}))
+        ],
         {placeHolder: 'Which task do you want to stop?'}
     );
 
     if (!taskName) {
+        return;
+    }
+
+    if (taskName.label === 'Stop all tasks') {
+        activeWatchers.forEach(({name}) => removeTask(name));
+        updateStatusBar();
         return;
     }
 

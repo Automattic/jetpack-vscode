@@ -27,11 +27,13 @@ export function activate(context: vscode.ExtensionContext) {
 	});
 
 	let rsync = vscode.commands.registerCommand('jetpack.rsync', rsyncCommand);
-	let watchprojet = vscode.commands.registerCommand('jetpack.watchProject', watchProjectCommand);
+	let watchproject = vscode.commands.registerCommand('jetpack.watchProject', watchProjectCommand);
 	let stopWatchingProject = vscode.commands.registerCommand('jetpack.watchProject.stop', stopWatchingProjectCommand);
 
 	context.subscriptions.push(disposable);
 	context.subscriptions.push(rsync);
+	context.subscriptions.push(watchproject);
+	context.subscriptions.push(stopWatchingProject);
 
 	activateStatusBar(context);
 }
