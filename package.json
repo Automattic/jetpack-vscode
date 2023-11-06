@@ -4,6 +4,7 @@
   "description": "Integrates the Jetpack toolkit into VS Code.",
   "version": "1.0.0",
   "publisher": "automattic",
+  "repository": "https://github.com/Automattic/jetpack-vscode",
   "engines": {
     "vscode": "^1.82.0"
   },
