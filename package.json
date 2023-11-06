@@ -2,7 +2,8 @@
   "name": "jetpack",
   "displayName": "Jetpack",
   "description": "Integrates the Jetpack toolkit into VS Code.",
-  "version": "0.0.1",
+  "version": "1.0.0",
+  "publisher": "automattic",
   "engines": {
     "vscode": "^1.82.0"
   },
