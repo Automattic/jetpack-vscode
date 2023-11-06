@@ -70,7 +70,7 @@ export const rsyncCommand = async () => {
 		return;
 	}
 
-	if (existingSite !== newSiteOption) {
+	if (existingSite === newSiteOption) {
 		const confirmation = await vscode.window.showWarningMessage(
 			`You're about to upload the contents of plugins/${plugin} to ${wpPath}. Do you want to proceed?`,
 			'Yes',
