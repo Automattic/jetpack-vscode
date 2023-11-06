@@ -1,71 +1,34 @@
-# jetpack README
-
-This is the README for your extension "jetpack". After writing up a brief description, we recommend including the following sections.
+# Jetpack VS Code Exntesion
 
 ## Features
 
-Describe specific features of your extension including screenshots of your extension in action. Image paths are relative to this README file.
+The Jetpack VS Code extension brings the power of the Jetpack CLI to your VS Code workspace! Version 1.0.0 includes two built in commands that you can use to speed up your development workflow: `rsync`, and `watch`.
 
-For example if there is an image subfolder under your extension project workspace:
+## Using the Commands
 
-\!\[feature X\]\(images/feature-x.png\)
+In your VS Code window, use `ctrl/cmd + shift + p` to open the command palette and search for "Jetpack" - you'll see three commands:
 
-> Tip: Many popular extensions utilize animations. This is an excellent way to show off your extension! We recommend short, focused animations that are easy to follow.
-
-## Requirements
-
-If you have any requirements or dependencies, add a section describing those and how to install and configure them.
+* **Jetpack: Rsync:** This will let you choose a remote site to connect and sync your development environment to. Choosing this command will walk you through choosing which project to rsync and which remote site to connect to. If you're connecting to a Jurassic Ninja site, it will open a terminal in your VSCode workspace so you can enter the site's password. 
+* **Jetpack: Watch Project:** The command will watch your specified project and re-build automatically whenever you save your changes, so you don't have to build manually every time you work on Jetpack. You can run this command multiple times to follow many projects a once. You can monitor which projects are being watched by hovering over the heart icon in VSCode's bottom toolbar.  
+* **Jetpack Stop Watching Project**: If you've watched projects, this command will let you stop watching a specific project, or stop watching all of them at once.
 
 ## Extension Settings
 
-Include if your extension adds any VS Code settings through the `contributes.configuration` extension point.
+The Jetpack VS Code extension has an option to enable analytics tracking. You can enable it in your setting.json or by searching for Analytics Settings in the settings UI:
 
-For example:
+* `jetpackVSCode.enableAnalytics`: Set to `true` or `false`. Set to `false` by default.
 
-This extension contributes the following settings:
-
-* `myExtension.enable`: Enable/disable this extension.
-* `myExtension.thing`: Set to `blah` to do something.
-
-## Known Issues
-
-Calling out known issues can help limit users opening duplicate issues against your extension.
+With this setting enabled, the extension will report how often a specific command is used. No personally identifying information is sent.
 
 ## Release Notes
 
-Users appreciate release notes as you update your extension.
-
 ### 1.0.0
 
-Initial release of ...
+- Initial release of extension
+- Adds Jetpack Rsync command
+- Adds Jetpack Watch and Stop Watching commands
+- Adds support for analytics tracking.
 
-### 1.0.1
+## Bug Reporting
 
-Fixed issue #.
-
-### 1.1.0
-
-Added features X, Y, and Z.
-
----
-
-## Following extension guidelines
-
-Ensure that you've read through the extensions guidelines and follow the best practices for creating your extension.
-
-* [Extension Guidelines](https://code.visualstudio.com/api/references/extension-guidelines)
-
-## Working with Markdown
-
-You can author your README using Visual Studio Code. Here are some useful editor keyboard shortcuts:
-
-* Split the editor (`Cmd+\` on macOS or `Ctrl+\` on Windows and Linux).
-* Toggle preview (`Shift+Cmd+V` on macOS or `Shift+Ctrl+V` on Windows and Linux).
-* Press `Ctrl+Space` (Windows, Linux, macOS) to see a list of Markdown snippets.
-
-## For more information
-
-* [Visual Studio Code's Markdown Support](http://code.visualstudio.com/docs/languages/markdown)
-* [Markdown Syntax Reference](https://help.github.com/articles/markdown-basics/)
-
-**Enjoy!**
+You can submit bug reports to https://github.com/Automattic/jetpack-vscode
