@@ -1,9 +1,14 @@
 # Change Log
 
-All notable changes to the "jetpack" extension will be documented in this file.
+## [1.0.1]
 
-Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how to structure this file.
+- Address typo
+- Add logo
 
-## [Unreleased]
+## [1.0.0]
 
-- Initial release
+- Initial release of extension
+- Adds Jetpack Rsync command
+- Adds Jetpack Watch and Stop Watching commands
+- Adds support for analytics tracking.
+

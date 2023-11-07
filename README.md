@@ -22,6 +22,11 @@ With this setting enabled, the extension will report how often a specific comman
 
 ## Release Notes
 
+### 1.0.1
+
+- Address typo
+- Add logo
+
 ### 1.0.0
 
 - Initial release of extension
@@ -32,3 +37,4 @@ With this setting enabled, the extension will report how often a specific comman
 ## Bug Reporting
 
 You can submit bug reports to https://github.com/Automattic/jetpack-vscode
+
