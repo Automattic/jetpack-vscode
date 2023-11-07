@@ -2,7 +2,7 @@
   "name": "jetpack",
   "displayName": "Jetpack",
   "description": "Integrates the Jetpack toolkit into VS Code.",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "publisher": "automattic",
   "repository": "https://github.com/Automattic/jetpack-vscode",
   "icon": "images/icon.png",
