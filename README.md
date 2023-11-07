@@ -1,4 +1,4 @@
-# Jetpack VS Code Exntesion
+# Jetpack VS Code Extension
 
 ## Features
 
